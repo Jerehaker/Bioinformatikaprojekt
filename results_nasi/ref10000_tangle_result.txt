@@ -1,0 +1,3 @@
+Number of nodes: 399
+Number of edges: 796
+Duration of algoritm for 74 sequences: 52313490us
