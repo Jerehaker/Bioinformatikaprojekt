@@ -12,11 +12,11 @@ Running our project:
 (you can comment/uncomment line 145 depending if you want output after every sequence (there are 74 sequences in our test file))
 
 Arguments explained:
-- match cost
-- miss cost
-- indel cost
-- sequences file (.fastq format)
-- the graph you want to run the algorithm on (.gfa format)
+- 1. match cost
+- 2. miss cost
+- 3. indel cost
+- 4. sequences file (.fastq format)
+- 5. the graph you want to run the algorithm on (.gfa format)
 
 Results:
 -------------
@@ -25,4 +25,6 @@ You can find out results in the results_nasi folder and the results from maickra
 
 Contact:
 --------
-jeronim96@fer.hr or here
+jeronim.matijevic@fer.hr or
+ema.puljak@fer.hr or
+luka.cagalj@fer.hr
