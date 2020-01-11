@@ -159,6 +159,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
             result.parents[topos.id].push_back(frompos);
         }
     }
+    
     if (hasEnding(filename, "snp.gfa")){
         GfaGraph new_graph;
         new_graph.edgeOverlap = result.edgeOverlap;
@@ -198,6 +199,27 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
             }
         }
         return new_graph;
+    }
+    
+    if (hasEnding(filename, "tangle.gfa")){
+        GfaGraph new_graph;
+        new_graph.edgeOverlap = result.edgeOverlap;
+        int id = 0;
+        std::unordered_map<int, int> id_map;
+        for (int i = 0; i < result.nodes.size(); i++){
+            // temp is string of graph node
+            std::vector<NodePos> parents = result.parents[i];
+            std::string temp = result.nodes[i];
+            std::cout << temp << std::endl;
+            for (int j = 0; j < strlen(temp.c_str()); j++){
+                // create new node for one char and save
+                // connection to old graph node id
+                new_graph.nodes[id] = temp.c_str()[j];
+                id_map[2 * i] = id;
+                // std::cout << temp.c_str() << std::endl;
+                
+                
+
     
     return result;
 }
