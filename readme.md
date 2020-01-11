@@ -21,7 +21,7 @@ Arguments explained:
 Results:
 -------------
 Our algorithm works 6 times slower than the on in maickrau's repo for every graph topology except for the tangled graph, we are not sure why that is happening
-You can find out results in the results_nasi folder and the results from maickrau's repo in results_njihovi. Both have been run on my PC which has an Iintel i5-4670k, 16GB of 1333MHz RAM(the project had a restriction of 16GB RAM but to me it seems that it is redundat since the whole point of Navaro's algorithm is taht it onnly stores 2 rows in memory which is SIGNIFICANTLY less than 16GB) on ubuntu 18.04
+You can find out results in the results_nasi folder and the results from maickrau's repo in results_njihovi. Both have been run on my PC which has an Iintel i5-4670k, 16GB of 1333MHz RAM(the project had a restriction of 16GB RAM but to me it seems that it is redundamt since the whole point of Navaro's algorithm is that it only stores 2 rows in memory which is SIGNIFICANTLY less than 16GB) on ubuntu 18.04
 
 Contact:
 --------
