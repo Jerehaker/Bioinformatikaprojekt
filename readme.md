@@ -1,8 +1,8 @@
 ### Bioinformatics project
 =========
 
-This repo contains our implementation Navaro's algorithm for finding the minimum edit distance of strings (gene sequences), this implementation uses only one thread and achieves dubious results. This project was done for the bioinformatics course at fer [course page](https://www.fer.unizg.hr/predmet/bio/)
-the algorithm is presented in: [this paper](https://www.sciencedirect.com/science/article/pii/S0304397599003333)
+This repo contains our implementation Navaro's algorithm for finding the minimum edit distance of strings (gene sequences), this implementation uses only one thread and achieves dubious results. This project was done for the bioinformatics course at fer [course page](https://www.fer.unizg.hr/predmet/bio/).
+The algorithm is presented in: [this paper](https://www.sciencedirect.com/science/article/pii/S0304397599003333)
 We have generated the test data from this repo: [Here](https://github.com/maickrau/GraphAligner/tree/PaperExperiments/WabiExperimentSnake) and compare our results to their implementation of the Navaro algorithm, we have also used their functions for reading from fastq files as well as their gfagraph class.
 Test files are: ref10000_simulatedreads.fastq, ref10000_snp.gfa, ref10000_onechar.gfa, ref10000_twopath.gfa, ref10000_tangle.gfa.
 
