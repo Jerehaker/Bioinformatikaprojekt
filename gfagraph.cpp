@@ -219,6 +219,30 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                 // std::cout << temp.c_str() << std::endl;
                 
                 
+                // for first character make connections to previous nodes
+                if (j == new_graph.edgeOverlap){
+                    for (int z = 0; z < parents.size(); z++){
+                        std::vector<NodePos> edges_of_parent = result.edges[parents[z]];
+
+                        // look if parent has edge to normal temporary node
+                        if (std::find(edges_of_parent.begin(), edges_of_parent.end(), NodePos {i, true}) != edges_of_parent.end()) {
+                            // look if parent is normal string
+                            if (parents[z].end == true ) {
+                                NodePos topos{id, true};
+                                NodePos fromPos{id_map[parents[z].id * 2] - new_graph.edgeOverlap, true};
+                                new_graph.edges[fromPos].push_back(topos);
+                                new_graph.parents[topos.id].push_back(fromPos);
+                            }
+                            else {
+                                NodePos topos {id, true};
+                                NodePos fromPos {id_map[parents[z].id * 2 + 1] - new_graph.edgeOverlap, true};
+                                new_graph.edges[fromPos].push_back(topos);
+                                new_graph.parents[topos.id].push_back(fromPos);
+                            }
+                        }
+                    }
+                }
+                
 
     
     return result;
