@@ -1,11 +1,3 @@
-//
-//  fastqloader.h
-//  BioinformaticsProject
-//
-//  Created by Ema Puljak on 05/12/2019.
-//  Copyright © 2019 Ema Puljak. All rights reserved.
-//
-
 #ifndef fastqloader_h
 #define fastqloader_h
 
