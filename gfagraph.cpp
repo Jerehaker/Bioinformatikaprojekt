@@ -185,9 +185,19 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                     }
                 }
                 
+                // for all others make connection to character that
+                // appeared before temp character
+                else {
+                    NodePos topos {id, true};
+                    NodePos fromPos {id - 1, true};
+                    new_graph.edges[fromPos].push_back(topos);
+                    new_graph.parents[topos.id].push_back(fromPos);
+                }
+                // increase counter for id
+                id += 1;
             }
         }
-    }
+        return new_graph;
     
     return result;
 }
