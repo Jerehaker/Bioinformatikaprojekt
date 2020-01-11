@@ -172,7 +172,20 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                 // create new node for one char and save
                 // connection to old graph node id
                 new_graph.nodes[id] = temp.c_str()[j];
-                id_map[i] = id;}
+                id_map[i] = id;
+            
+
+                // for first character make connections to previous nodes
+                if (j == 0){
+                    for (auto iter = parents.begin(); iter != parents.end(); ++iter){
+                        NodePos topos {id, true};
+                        NodePos fromPos {id_map[iter->id], true};
+                        new_graph.edges[fromPos].push_back(topos);
+                        new_graph.parents[topos.id].push_back(fromPos);
+                    }
+                }
+                
+            }
         }
     }
     
