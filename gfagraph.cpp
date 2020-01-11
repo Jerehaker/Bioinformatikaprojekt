@@ -242,8 +242,16 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                         }
                     }
                 }
-                
 
+                if (j != 0) {
+                    NodePos topos {id, true};
+                    NodePos fromPos {id - 1, true};
+                    new_graph.edges[fromPos].push_back(topos);
+                    new_graph.parents[topos.id].push_back(fromPos);
+                }
+                // increase counter for id
+                id += 1;
+            }
     
     return result;
 }
