@@ -1,11 +1,3 @@
-//
-//  fastqloader.cpp
-//  BioinformaticsProject
-//
-//  Created by Ema Puljak on 05/12/2019.
-//  Copyright © 2019 Ema Puljak. All rights reserved.
-//
-
 #include <stdio.h>
 #include <algorithm>
 #include <fstream>
