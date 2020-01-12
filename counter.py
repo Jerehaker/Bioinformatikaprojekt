@@ -1,3 +1,8 @@
+"""
+this is a python script used for sanity checking while we were loading the snp and tangle graph into memory
+it counts the expected number of nodes and the expected number of edges
+"""
+
 f = open("test11tangle.gfa")
 brojac = 0
 brojac3 = 0
