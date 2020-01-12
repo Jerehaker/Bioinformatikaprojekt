@@ -1,9 +1,57 @@
-#include<assert.h>
+//
+//  gfagraph.cpp
+//  BioinformaticsProject
+//
+//  Created by Ema Puljak on 05/12/2019.
+//  Copyright © 2019 Ema Puljak. All rights reserved.
+//
+
 #include <stdio.h>
 #include <fstream>
 #include <sstream>
+#include "assert.h"
 #include "gfagraph.h"
-#include<iostream>
+#include <iostream>
+#include <cstring>
+#include "vector"
+#include <algorithm>
+#include <unordered_map>
+
+bool hasEnding (std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length()) {
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    } else {
+        return false;
+    }
+}
+// A - T , C - G
+std::string getReverseComplement (std::string const &sequence) {
+    //char reverse_complement[sequence.size()];
+    std::string reverse_complement = "";
+    for (int i = sequence.size() - 1; i >= 0; i--) {
+
+        char character = sequence.c_str()[i];
+        char new_character;
+        switch (character) {
+            case 'A':
+                new_character = 'T';
+                break;
+            case 'T':
+                new_character = 'A';
+                break;
+            case 'C':
+                new_character = 'G';
+                break;
+            case 'G':
+                new_character = 'C';
+                break;
+        }
+        reverse_complement.push_back(new_character);
+        //reverse_complement[sequence.size() - i - 1] = new_character;
+    }
+    return std::string(reverse_complement);
+}
+
 
 NodePos::NodePos() :
 id(0),
@@ -45,16 +93,13 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
     std::ifstream file {filename};
     while (file.good())
     {
-        
         std::string line;
         std::getline(file, line);
         if (!file.good()) break;
         if (line.size() == 0) continue;
         if (line[0] != 'S' && line[0] != 'L') continue;
-        //std::cout<<line[0]<<" mi je prvi znak u lineu"<<std::endl;
         if (line[0] == 'S')
         {
-            //std::cout<<"ok prvo slovo mi je s hhhhhhh"<<std::endl;
             std::stringstream sstr {line};
             int id;
             std::string dummy;
@@ -90,7 +135,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
             result.parents[topos.id].push_back(frompos);
         }
     }
-    
+
     if (hasEnding(filename, "snp.gfa")){
         GfaGraph new_graph;
         new_graph.edgeOverlap = result.edgeOverlap;
@@ -105,7 +150,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                 // connection to old graph node id
                 new_graph.nodes[id] = temp.c_str()[j];
                 id_map[i] = id;
-            
+
 
                 // for first character make connections to previous nodes
                 if (j == 0){
@@ -116,7 +161,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                         new_graph.parents[topos.id].push_back(fromPos);
                     }
                 }
-                
+
                 // for all others make connection to character that
                 // appeared before temp character
                 else {
@@ -130,8 +175,9 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
             }
         }
         return new_graph;
+
     }
-    
+
     if (hasEnding(filename, "tangle.gfa")){
         GfaGraph new_graph;
         new_graph.edgeOverlap = result.edgeOverlap;
@@ -141,38 +187,13 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
             // temp is string of graph node
             std::vector<NodePos> parents = result.parents[i];
             std::string temp = result.nodes[i];
-            std::cout << temp << std::endl;
+            //std::cout << temp << std::endl;
             for (int j = 0; j < strlen(temp.c_str()); j++){
                 // create new node for one char and save
                 // connection to old graph node id
                 new_graph.nodes[id] = temp.c_str()[j];
                 id_map[2 * i] = id;
                 // std::cout << temp.c_str() << std::endl;
-                
-                
-                // for first character make connections to previous nodes
-                if (j == new_graph.edgeOverlap){
-                    for (int z = 0; z < parents.size(); z++){
-                        std::vector<NodePos> edges_of_parent = result.edges[parents[z]];
-
-                        // look if parent has edge to normal temporary node
-                        if (std::find(edges_of_parent.begin(), edges_of_parent.end(), NodePos {i, true}) != edges_of_parent.end()) {
-                            // look if parent is normal string
-                            if (parents[z].end == true ) {
-                                NodePos topos{id, true};
-                                NodePos fromPos{id_map[parents[z].id * 2] - new_graph.edgeOverlap, true};
-                                new_graph.edges[fromPos].push_back(topos);
-                                new_graph.parents[topos.id].push_back(fromPos);
-                            }
-                            else {
-                                NodePos topos {id, true};
-                                NodePos fromPos {id_map[parents[z].id * 2 + 1] - new_graph.edgeOverlap, true};
-                                new_graph.edges[fromPos].push_back(topos);
-                                new_graph.parents[topos.id].push_back(fromPos);
-                            }
-                        }
-                    }
-                }
 
                 if (j != 0) {
                     NodePos topos {id, true};
@@ -183,9 +204,9 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                 // increase counter for id
                 id += 1;
             }
-            
+
             std::string reverse_complement = getReverseComplement(temp);
-            std::cout << reverse_complement.c_str()  << std::endl;
+            //std::cout << reverse_complement.c_str()  << std::endl;
             int length = strlen(reverse_complement.c_str());
 
             for (int j = 0; j < length; j++){
@@ -193,6 +214,61 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                 // connection to old graph node id
                 new_graph.nodes[id] = reverse_complement.c_str()[j];
                 id_map[2 * i + 1] = id;
+
+                if (j != 0) {
+                    NodePos topos {id, true};
+                    NodePos fromPos {id - 1, true};
+                    new_graph.edges[fromPos].push_back(topos);
+                    new_graph.parents[topos.id].push_back(fromPos);
+                }
+                // increase counter for id
+                id += 1;
+            }
+        }
+
+        id = 0;
+        for (int i = 0; i < result.nodes.size(); i++){
+            // temp is string of graph node
+            std::vector<NodePos> parents = result.parents[i];
+            std::string temp = result.nodes[i];
+            //std::cout << temp << std::endl;
+            for (int j = 0; j < strlen(temp.c_str()); j++){
+                // std::cout << temp.c_str() << std::endl;
+
+                // for first character make connections to previous nodes
+                if (j == new_graph.edgeOverlap){
+                    for (int z = 0; z < parents.size(); z++){
+                        std::vector<NodePos> edges_of_parent = result.edges[parents[z]];
+
+                        // look if parent has edge to normal temporary node
+                        if (std::find(edges_of_parent.begin(), edges_of_parent.end(), NodePos {i, true}) != edges_of_parent.end()) {
+                            // look if parent is normal string
+                            if (parents[z].end == true ) {
+                                NodePos topos{id, true};
+                                NodePos fromPos{id_map[parents[z].id * 2], true};
+                                new_graph.edges[fromPos].push_back(topos);
+                                new_graph.parents[topos.id].push_back(fromPos);
+                            }
+                            else {
+                                NodePos topos {id, true};
+                                NodePos fromPos {id_map[parents[z].id * 2 + 1], true};
+                                new_graph.edges[fromPos].push_back(topos);
+                                new_graph.parents[topos.id].push_back(fromPos);
+                            }
+                        }
+                    }
+                }
+                // increase counter for id
+                id += 1;
+            }
+
+            std::string reverse_complement = getReverseComplement(temp);
+            //std::cout << reverse_complement.c_str()  << std::endl;
+            int length = strlen(reverse_complement.c_str());
+
+            for (int j = 0; j < length; j++){
+                // create new node for one char and save
+                // connection to old graph node id
 
                 // for first character make connections to previous nodes
                 if (j == new_graph.edgeOverlap){
@@ -204,33 +280,26 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
                             // look if parent is normal string
                             if (parents[z].end == true ) {
                                 NodePos topos{id, true};
-                                NodePos fromPos{id_map[parents[z].id * 2] - new_graph.edgeOverlap, true};
+                                NodePos fromPos{id_map[parents[z].id * 2], true};
                                 new_graph.edges[fromPos].push_back(topos);
                                 new_graph.parents[topos.id].push_back(fromPos);
                             }
                             else {
                                 NodePos topos {id, true};
-                                NodePos fromPos {id_map[parents[z].id * 2 + 1] - new_graph.edgeOverlap, true};
+                                NodePos fromPos {id_map[parents[z].id * 2 + 1], true};
                                 new_graph.edges[fromPos].push_back(topos);
                                 new_graph.parents[topos.id].push_back(fromPos);
                             }
                         }
                     }
                 }
-                
-                if (j != 0) {
-                    NodePos topos {id, true};
-                    NodePos fromPos {id - 1, true};
-                    new_graph.edges[fromPos].push_back(topos);
-                    new_graph.parents[topos.id].push_back(fromPos);
-                }
                 // increase counter for id
                 id += 1;
             }
         }
+
         return new_graph;
     }
+
     return result;
 }
-
-
