@@ -18,6 +18,7 @@ Arguments explained:
 - 3. indel cost
 - 4. sequences file (.fastq format)
 - 5. the graph you want to run the algorithm on (.gfa format)
+- 6. display boolean; True:display results in console after every sequence, False:write all sequence results in the _results.txt
 
 Results:
 -------------
