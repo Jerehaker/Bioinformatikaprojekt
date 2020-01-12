@@ -1,2 +1,2 @@
 compilation command: g++ -std=c++11 main.cpp gfagraph.cpp fastqloader.cpp -o test
-running command: ./test 0 1 1 ref10000_simulatedreads.fastq ref10000_onechar.gfa 
+running command: ./test 0 1 1 ref10000_simulatedreads.fastq ref10000_onechar.gfa True
