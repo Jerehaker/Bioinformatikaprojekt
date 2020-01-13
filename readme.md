@@ -9,7 +9,7 @@ Test files are: ref10000_simulatedreads.fastq, ref10000_snp.gfa, ref10000_onecha
 Running our project:
 --------------
 * 1. Compile the code using this command: g++ -std=c++11 main.cpp gfagraph.cpp fastqloader.cpp -o test
-* 2. Run the code using this command: ./test 0 1 1 ref10000_simulatedreads.fastq ref10000_onechar.gfa 
+* 2. Run the code using this command: ./test 0 1 1 ref10000_simulatedreads.fastq ref10000_onechar.gfa 1
 (you can comment/uncomment line 145 depending if you want output after every sequence (there are 74 sequences in our test file))
 
 Arguments explained:
@@ -18,11 +18,11 @@ Arguments explained:
 - 3. indel cost
 - 4. sequences file (.fastq format)
 - 5. the graph you want to run the algorithm on (.gfa format)
-- 6. display boolean; True:display results in console after every sequence, False:write all sequence results in the _results.txt
+- 6. display boolean - passed as integer; 1:display results in console after every sequence, 0:write all sequence results in the _results.txt
 
 Results:
 -------------
-Our algorithm works 6 times slower than the on in maickrau's repo for every graph topology except for the tangled graph, we are not sure why that is happening
+Our algorithm works ~6 times slower than the on in maickrau's repo for every graph topology except for the tangled graph, we are not sure why that is happening
 You can find out results in the results_nasi folder and the results from maickrau's repo in results_njihovi. Both have been run on my PC which has an Iintel i5-4670k, 16GB of 1333MHz RAM(the project had a restriction of 16GB RAM but to me it seems that it is redundamt since the whole point of Navaro's algorithm is that it only stores 2 rows in memory which is SIGNIFICANTLY less than 16GB) on ubuntu 18.04
 
 Contact:
