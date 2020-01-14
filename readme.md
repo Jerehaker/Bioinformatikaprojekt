@@ -22,8 +22,8 @@ Arguments explained:
 
 Results:
 -------------
-Our algorithm works ~6 times slower than the on in maickrau's repo for every graph topology except for the tangled graph, we are not sure why that is happening
-You can find out results in the results_ours folder and the results from maickrau's repo in results_theirs. Both have been run on my PC which has an Iintel i5-4670k, 16GB of 1333MHz RAM(the project had a restriction of 16GB RAM but to me it seems that it is redundamt since the whole point of Navaro's algorithm is that it only stores 2 rows in memory which is SIGNIFICANTLY less than 16GB) on ubuntu 18.04
+Our algorithm works ~6 times slower than the on in maickrau's repo for every graph topology except for the tangled graph. we were not able to run the algortihm on tangle graph because it has cyclic regions.
+You can find out results in the results_ours folder and the results from maickrau's repo in results_theirs. Both have been run on my PC which has an Iintel i5-4670k, 16GB of 1333MHz RAM (the project had a restriction of 16GB RAM but to me it seems that it is redundamt since the whole point of Navaro's algorithm is that it only stores 2 rows in memory which is SIGNIFICANTLY less than 16GB) on ubuntu 18.04
 
 
 | Runtime [μs]   | onechar graph | twopath graph | snp graph |
@@ -33,7 +33,9 @@ You can find out results in the results_ours folder and the results from maickra
 | Runtimes ratio | 6.93 | 6.59 | 9.15 |
 | Memory consumption [MiB] | 6.5 | 12.6 | 7.5 |
 
-
+Future work:
+-------------
+Expand the algorithm for cyclic graphs.
 
 Contact:
 --------
