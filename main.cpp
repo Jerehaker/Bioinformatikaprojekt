@@ -131,7 +131,7 @@ int main (int argc, char** argv){
     outputFile << "Number of nodes: " << num_nodes << endl;
     outputFile << "Number of edges: " << num_edges << endl;
     outputFile << "Duration of algoritm for all sequences: " << duration_time << " microseconds" << endl;
-    if(Display == False)
+    if(Display == false)
         outputFile << results << endl;
     outputFile.close();
     return 0;
