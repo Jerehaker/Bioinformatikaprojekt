@@ -136,13 +136,7 @@ int main (int argc, char** argv){
     outputFile.close();
     return 0;
 }
-//
-//  main.cpp
-//  BioinfProject
-//
-//  Created by Ema Puljak on 09/01/2020.
-//  Copyright © 2020 Ema Puljak. All rights reserved.
-//
+/*
 #include <stdio.h>
 #include <iostream>
 #include "gfagraph.h"
@@ -280,4 +274,4 @@ int main (int argc, char** argv){
         outputFile << results << endl;
     outputFile.close();
     return 0;
-}
+}*/
