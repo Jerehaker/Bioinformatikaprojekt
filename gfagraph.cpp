@@ -133,7 +133,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
         new_graph.edgeOverlap = result.edgeOverlap;
 
         // id of nodes in new_graph
-        int id = 0;
+        int id = 1;
 
         // map contains <key, value> pairs
         // key represents id of result node
@@ -180,7 +180,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
         GfaGraph new_graph;
         new_graph.edgeOverlap = result.edgeOverlap;
 
-        int id = 0;
+        int id = 1;
 
         // map contains <key, value> pairs
         // key represents id of result node
@@ -227,7 +227,7 @@ GfaGraph GfaGraph::LoadFromFile(std::string filename)
             }
         }
 
-        id = 0;
+        id = 1;
         for (int i = 0; i < result.nodes.size(); i++){
             std::vector<NodePos> parents = result.parents[i];
             std::string temp = result.nodes[i];
