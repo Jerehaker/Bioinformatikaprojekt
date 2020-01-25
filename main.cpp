@@ -98,7 +98,7 @@ int Navaro (string A, GfaGraph B, int A_n, int B_n, int* arguments){
             fill(current_row.begin(),current_row.end(),0);
         }
         next_row.push_back(i+1);
-        for(int j=1; j < B_n; j++){
+        for(int j=1; j < B_n + 1; j++){
             current_node = B.nodes.at(j);
             if(B.parents.find(j) != B.parents.end()){ parents = B.parents.at(j);}
             //node_state_func calculates the result for every node in the matrix
